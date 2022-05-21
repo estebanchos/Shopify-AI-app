@@ -15,4 +15,89 @@ body {
     margin: 0;
     font-family: "Open Sans";
     font-weight: 400;
+    background-color: $color-background-main;
+    color: $color-font-primary;
+}
+
+header,
+footer {
+    display: flex;
+    background-color: $color-background-header-and-footer;
+    color: $color-font-secondary;
+    padding: 1rem;
+    justify-content: center;
+
+    @include desktop {
+        justify-content: flex-start;
+    }
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+
+    @include desktop {
+        margin-left: 3rem;
+    }
+
+    &__icon {
+        width: 60px;
+        height: 59.6px;
+        margin-right: 1rem;
+
+        @include tablet {
+            margin-right: 2rem;
+        }
+    }
+
+    &__title {
+        font-size: 2rem;
+        margin: 0;
+    }
+}
+
+
+.contact {
+
+    @include tablet {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 70%;
+    }
+
+    @include desktop {
+        justify-content: flex-start;
+        margin-left: 3rem;
+    }
+
+    &__contacts-container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        @include tablet {
+            width: 50%;
+            max-width: 26.875rem;
+        }
+    }
+
+    &__title {
+        margin: 0;
+        padding: 1rem 0;
+    }
+
+    &__link {
+        // width: 30px;
+        // padding: 1rem;
+        // margin: 0 auto;
+
+        @include tablet {
+            margin: 0;
+        }
+    }
+
+    &__icon {
+        width: 30px;
+    }
 }
