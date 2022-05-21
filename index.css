@@ -1,0 +1,15 @@
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-family: "Open Sans";
+  font-weight: 400;
+}/*# sourceMappingURL=index.css.map */
