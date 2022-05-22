@@ -1,5 +1,6 @@
-require('dotenv').config();
-const apiKey = process.env.API_KEY;
+import API_KEY from "./apikey";
+console.log(API_KEY)
+// const apiKey = process.env.API_KEY;
 const apiUrl = "https://api.openai.com/v1/engines/text-curie-001/completions";
 //  ====== storing data for the user in the browser
 let db;
