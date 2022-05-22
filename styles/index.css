@@ -140,6 +140,10 @@ header {
   align-items: center;
   height: 2.5rem;
   box-shadow: 0 5px 9px -1px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s linear 0s;
+}
+.form__button:hover {
+  border: 3px solid #5bacc3;
 }
 @media (min-width: 768px) {
   .form__button {
@@ -174,12 +178,22 @@ header {
 }
 @media (min-width: 768px) {
   .item__prompt {
-    width: 35%;
+    width: 33%;
+  }
+}
+@media (min-width: 1280px) {
+  .item__prompt {
+    width: 25%;
   }
 }
 @media (min-width: 768px) {
   .item__response {
-    width: 55%;
+    width: 65%;
+  }
+}
+@media (min-width: 1280px) {
+  .item__response {
+    width: 70%;
   }
 }
 .item__label {

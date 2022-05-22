@@ -1,22 +1,18 @@
-// require("dotenv").config();
-// const apiKey = process.env.API_KEY;
-// const url = `something/${apiKey}`;
-
+const apiKey = "#ign#API_KEY_HERE#del#";
+const apiUrl = "https://api.openai.com/v1/engines/text-curie-001/completions";
 //  ====== storing data for the user in the browser
 let db;
 const openRequest = window.indexedDB.open("names_db", 1);
 const galleryEl = document.querySelector(".gallery__list")
-const promptLabel = "Prompt Label";
-const responseLabel = "Response Label";
-
+const promptLabel = "What do you want to sell?";
+const responseLabel = "Business Ideas:";
 openRequest.addEventListener('error', () => console.error('Database failed to open'));
-
+//  ====== building page on data saved in the browser
 openRequest.addEventListener('success', () => {
     console.log('Database opened successfully');
     db = openRequest.result;
     displayData();
 });
-
 openRequest.addEventListener('upgradeneeded', e => {
     db = e.target.result;
     const objectStore = db.createObjectStore('names_os');
@@ -24,27 +20,56 @@ openRequest.addEventListener('upgradeneeded', e => {
     objectStore.createIndex('response', 'response', { unique: false });
     console.log('Database setup complete');
 });
-
 // ====== form event and handler
 const form = document.querySelector(".form");
 const promptInput = document.querySelector("#prompt")
-const responseValue = "placeholder"; // this will later be returned by the API
 form.addEventListener("submit", addData);
 
 function addData(e) {
     e.preventDefault();
-    const newName = {
-        prompt: promptInput.value,
-        response: responseValue
-    }
-    console.log(`we are saving: ${newName}`)
+    let userPrompt = promptInput.value;
+    let apiPrompt = "Brainstorm some ideas combining ecommerce and " + userPrompt
+    let responseValue = "";
+    // sending prompt to API and getting a response.
+    let headersApi = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer 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"
+    };
+    let dataApi = JSON.stringify({
+        "prompt": apiPrompt,
+        "max_tokens": 50,
+        "temperature": 0.6,
+        "top_p": 1,
+        "frequency_penalty": 1,
+        "presence_penalty": 1
+    })
+    axios({
+        method: "post",
+        url: apiUrl,
+        headers: headersApi,
+        data: dataApi
+    })
+        .then(response => {
+            console.log("response is: " + response.data.choices[0].text)
+            responseValue = response.data.choices[0].text;
+            console.log("new variable is: " + responseValue)
+            const newName = {
+                prompt: userPrompt,
+                response: responseValue
+            }
+            saveData(newName);
+        })
+        .catch(error => {
+            console.log(`error sending request to API: ${error}`)
+        })
+}
+
+function saveData(data) {
     const transaction = db.transaction(["names_os"], "readwrite");
     const objectStore = transaction.objectStore("names_os");
-    const addRequest = objectStore.add(newName);
+    const addRequest = objectStore.add(data);
     addRequest.addEventListener("success", () => {
-        console.log(`input value ${promptInput}`)
         promptInput.value = "";
-        console.log(`input value post clear ${promptInput}`)
     })
     transaction.addEventListener("complete", () => {
         console.log("database updated");
@@ -53,12 +78,10 @@ function addData(e) {
     transaction.addEventListener("error", () => {
         console.error("transaction incomplete");
     })
-
 }
 
 function displayData() {
     galleryEl.innerHTML = "";
-    let counter = 0;
     const promptAndNameList = [];
     const objectStore = db.transaction("names_os").objectStore("names_os");
     objectStore.openCursor().addEventListener("success", e => {
@@ -71,6 +94,7 @@ function displayData() {
             })
             cursor.continue();
         } else {
+            console.table(promptAndNameList); // delete this
             promptAndNameList.forEach((item, index) => {
                 const galleryItemEl = document.createElement("li");
                 galleryItemEl.classList.add("gallery__item");
@@ -97,7 +121,6 @@ function displayData() {
                 if (index === 0) {
                     itemPromptLabelEl.classList.add("item__label", "item__label--first");
                     itemResponseLabelEl.classList.add("item__label", "item__label--first");
-                    counter++;
                 } else {
                     itemPromptLabelEl.classList.add("item__label");
                     itemResponseLabelEl.classList.add("item__label");
@@ -105,9 +128,13 @@ function displayData() {
                 itemPromptLabelEl.textContent = promptLabel;
                 itemPromptContentEl.textContent = item.prompt;
                 itemResponseLabelEl.textContent = responseLabel;
-                itemResponseContentEl.textContent = item.response;
-                // galleryItemEl.setAttribute("data-node-id", cursor.value.id);
+                let formattedResponse = item.response.replaceAll(" \n", "<br>").replaceAll(".\n", "<br>").replaceAll("-", "- ");
+                itemResponseContentEl.innerHTML = formattedResponse;
+                console.log("saved response is: " + item.response); // delete this
+                console.log("content in element is: " + itemResponseContentEl.textContent); // delete this
             })
+            const clearButtonEl = document.createElement("button");
+
         }
     })
 }

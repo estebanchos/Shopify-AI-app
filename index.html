@@ -10,28 +10,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./styles/index.css">
-    <title>Charlie's AI app</title>
+    <title>Charlie's OpenAI app</title>
 </head>
 
 <body>
     <header>
         <section class="page-header">
             <img class="page-header__icon" src="./assets/charlie-icon.png" alt="emoticon from Charlie">
-            <h1 class="page-header__title">Charlie's AI app</h1>
+            <h1 class="page-header__title">Charlie's Shopify Store Idea Generator</h1>
         </section>
     </header>
     <main>
         <section class="app">
-            <h2 class="app__title">AI does XYZ</h2>
+            <h2 class="app__title">Your next Shopify Store starts here</h2>
             <section class="app__input">
                 <form class="form">
                     <div class="form__container">
-                        <label class="form__label" for="prompt">Enter prompt</label>
-                        <textarea class="form__prompt" name="prompt" id="prompt" rows="4"
-                            placeholder="Add the main activity of your Shopify store" required></textarea>
+                        <label class="form__label" for="prompt">What do you want to sell on your store?</label>
+                        <input class="form__prompt" name="prompt" id="prompt"
+                            placeholder="For example, sustainably grown coffee" required>
                     </div>
                     <div class="form__container">
-                        <button class="form__button">New business name</button>
+                        <button class="form__button">Generate ideas</button>
                     </div>
                 </form>
             </section>
@@ -78,6 +78,7 @@
             </article>
         </section>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
     <script src="./index.js"></script>
 </body>
 

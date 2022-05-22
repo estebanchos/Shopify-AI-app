@@ -141,6 +141,11 @@ header {
         align-items: center;
         height: 2.5rem;
         box-shadow: 0 5px 9px -1px rgba(0, 0, 0, 0.25);
+        transition: all 0.2s linear 0s;
+
+        &:hover {
+            border: 3px solid #5bacc3;
+          }
 
         @include tablet {
             margin-left: auto;
@@ -177,13 +182,19 @@ header {
 
     &__prompt {
         @include tablet {
-            width: 35%;
+            width: 33%;
+        }
+        @include desktop {
+            width: 25%;
         }
     }
 
     &__response {
         @include tablet {
-            width: 55%;
+            width: 65%;
+        }
+        @include desktop {
+            width: 70%;
         }
     }
 
