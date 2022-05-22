@@ -1,11 +1,12 @@
-const apiKey = "#ign#API_KEY_HERE#del#";
+const apiKey = "#ign##del#";
 const apiUrl = "https://api.openai.com/v1/engines/text-curie-001/completions";
 //  ====== storing data for the user in the browser
 let db;
 const openRequest = window.indexedDB.open("names_db", 1);
-const galleryEl = document.querySelector(".gallery__list")
-const promptLabel = "What do you want to sell?";
-const responseLabel = "Business Ideas:";
+const galleryEl = document.querySelector(".gallery__list");
+const inputContainerEl = document.querySelector(".app__input");
+const promptLabel = "Your Dream";
+const responseLabel = "Your Endless Possibilities";
 openRequest.addEventListener('error', () => console.error('Database failed to open'));
 //  ====== building page on data saved in the browser
 openRequest.addEventListener('success', () => {
@@ -22,7 +23,7 @@ openRequest.addEventListener('upgradeneeded', e => {
 });
 // ====== form event and handler
 const form = document.querySelector(".form");
-const promptInput = document.querySelector("#prompt")
+const promptInput = document.querySelector("#prompt");
 form.addEventListener("submit", addData);
 
 function addData(e) {
@@ -64,22 +65,21 @@ function addData(e) {
         })
 }
 
-function saveData(data) {
-    const transaction = db.transaction(["names_os"], "readwrite");
-    const objectStore = transaction.objectStore("names_os");
-    const addRequest = objectStore.add(data);
-    addRequest.addEventListener("success", () => {
-        promptInput.value = "";
-    })
-    transaction.addEventListener("complete", () => {
-        console.log("database updated");
+// ====== delete event and handler
+const deleteButton = document.querySelector(".app__button");
+deleteButton.addEventListener("click", clearData);
+function clearData() {
+    let transaction = db.transaction(["names_os"], "readwrite");
+    transaction.oncomplete = (e) => { console.log("success opening") };
+    transaction.onerror = (e) => { console.log("unable to open") };
+    let objectStore = transaction.objectStore("names_os");
+    let clearRequest = objectStore.clear()
+    clearRequest.onsuccess = (e) => {
+        console.log("clear successful");
         displayData();
-    })
-    transaction.addEventListener("error", () => {
-        console.error("transaction incomplete");
-    })
+    }
 }
-
+// ====== general use func
 function displayData() {
     galleryEl.innerHTML = "";
     const promptAndNameList = [];
@@ -94,7 +94,7 @@ function displayData() {
             })
             cursor.continue();
         } else {
-            console.table(promptAndNameList); // delete this
+            // append button to section app__gallery
             promptAndNameList.forEach((item, index) => {
                 const galleryItemEl = document.createElement("li");
                 galleryItemEl.classList.add("gallery__item");
@@ -130,11 +130,22 @@ function displayData() {
                 itemResponseLabelEl.textContent = responseLabel;
                 let formattedResponse = item.response.replaceAll(" \n", "<br>").replaceAll(".\n", "<br>").replaceAll("-", "- ");
                 itemResponseContentEl.innerHTML = formattedResponse;
-                console.log("saved response is: " + item.response); // delete this
-                console.log("content in element is: " + itemResponseContentEl.textContent); // delete this
             })
-            const clearButtonEl = document.createElement("button");
-
         }
+    })
+}
+function saveData(data) {
+    const transaction = db.transaction(["names_os"], "readwrite");
+    const objectStore = transaction.objectStore("names_os");
+    const addRequest = objectStore.add(data);
+    addRequest.addEventListener("success", () => {
+        promptInput.value = "";
+    })
+    transaction.addEventListener("complete", () => {
+        console.log("database updated");
+        displayData();
+    })
+    transaction.addEventListener("error", () => {
+        console.error("transaction incomplete");
     })
 }

@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/index.css">
     <title>Charlie's OpenAI app</title>
 </head>
@@ -16,8 +19,8 @@
 <body>
     <header>
         <section class="page-header">
-            <img class="page-header__icon" src="./assets/charlie-icon.png" alt="emoticon from Charlie">
-            <h1 class="page-header__title">Charlie's Shopify Store Idea Generator</h1>
+            <h1 class="page-header__title">Dream Generator</h1>
+            <p class="page-header__tagline">dream as big as you can. bring your dream online.</p>
         </section>
     </header>
     <main>
@@ -35,32 +38,9 @@
                     </div>
                 </form>
             </section>
+            <button class="app__button">Clear results</button>
             <section class="app__gallery gallery">
                 <ul class="gallery__list">
-                    <li class="gallery__item">
-                        <ul class="item">
-                            <li class="item__prompt">
-                                <p class="item__label item__label--first">prompt label</p>
-                                <p class="item__content">prompt</p>
-                            </li>
-                            <li class="item__response">
-                                <p class="item__label item__label--first">response label</p>
-                                <p class="item__content">response</p>
-                            </li>
-                        </ul>
-                    <li class="gallery__item">
-                        <ul class="item">
-                            <li class="item__prompt">
-                                <p class="item__label">prompt label 2</p>
-                                <p class="item__content">prompt 2</p>
-                            </li>
-                            <li class="item__response">
-                                <p class="item__label">response label 2</p>
-                                <p class="item__content">response 2</p>
-                            </li>
-                        </ul>
-                    </li>
-                    </li>
                 </ul>
             </section>
         </section>
@@ -76,6 +56,10 @@
                 <a class="contact__link" href="https://github.com/estebanchos"><img class="contact__icon"
                         src="./assets/github-icon.png" alt="github icon"></a>
             </article>
+        </section>
+        <section class="author">
+            <img class="author__icon" src="./assets/charlie-icon.png" alt="emoticon from Charlie">
+            <p class="author__signature">a website made by Charlie</p>
         </section>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>

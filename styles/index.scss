@@ -15,49 +15,45 @@ body {
     margin: 0;
     font-family: "Open Sans";
     font-weight: 400;
-    background-color: $color-background-main;
+    background-color: $color-background;
     color: $color-font-primary;
 }
 
-header,
-footer {
+header {
     display: flex;
-    background-color: $color-background-header-and-footer;
+    background-image: url("../assets/header-image.png");
+    background-size: cover;
+    background-blend-mode: multiply;
+    background-position: center;
+    background-color: rgba(50, 50, 50, 0.2);
+    height: 20rem;
     color: $color-font-secondary;
     padding: 1rem;
     justify-content: center;
-
-    @include desktop {
-        justify-content: flex-start;
-    }
-}
-
-header {
-    position: sticky;
-    top: 0;
 }
 
 .page-header {
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-direction: column;
 
-    @include desktop {
-        margin-left: 3rem;
-    }
-
-    &__icon {
-        width: 60px;
-        height: 59.6px;
-        margin-right: 1rem;
+    &__title {
+        font-family: 'Lobster Two', cursive;
+        font-size: 3rem;
+        margin: 0;
 
         @include tablet {
-            margin-right: 2rem;
+            font-size: 5rem;
         }
     }
 
-    &__title {
-        font-size: 2rem;
-        margin: 0;
+    &__tagline {
+        font-size: 1rem;
+
+        @include tablet {
+            font-size: 2rem;
+        }
     }
 }
 
@@ -84,6 +80,30 @@ header {
     &__input {
         display: flex;
         justify-content: center;
+
+    }
+
+    &__button {
+        font-size: 1rem;
+        background-color: $color-button-secondary;
+        border-radius: 6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 2.5rem;
+        transition: all 0.2s linear 0s;
+        width: 100%;
+        border: 0;
+
+        &:hover {
+            border: 3px solid #5bacc3;
+        }
+
+        @include tablet {
+            padding: 0 2rem;
+            margin-left: auto;
+            width: 12rem;
+        }
     }
 
     &__gallery {
@@ -95,10 +115,6 @@ header {
 
 .form {
     width: 100%;
-
-    @include desktop {
-        width: 45rem;
-    }
 
     &__container {
         display: flex;
@@ -133,23 +149,23 @@ header {
 
     &__button {
         font-size: 1rem;
-        color: $color-font-secondary;
-        background-color: $color-main-blue;
+        background-color: $color-button-main;
         border-radius: 6px;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 2.5rem;
-        box-shadow: 0 5px 9px -1px rgba(0, 0, 0, 0.25);
         transition: all 0.2s linear 0s;
+        border: 0;
 
         &:hover {
             border: 3px solid #5bacc3;
-          }
+        }
 
         @include tablet {
             margin-left: auto;
             padding: 0 2rem;
+            width: 12rem;
         }
     }
 }
@@ -184,6 +200,7 @@ header {
         @include tablet {
             width: 33%;
         }
+
         @include desktop {
             width: 25%;
         }
@@ -193,6 +210,7 @@ header {
         @include tablet {
             width: 65%;
         }
+
         @include desktop {
             width: 70%;
         }
@@ -200,11 +218,12 @@ header {
 
     &__label {
         color: $color-label;
-        font-size: 0.75rem;
+        font-size: 1rem;
+        font-family: 'Lobster Two';
         font-weight: 600;
 
         @include tablet {
-            font-size: 1rem;
+            font-size: 1.5rem;
             display: none;
         }
 
@@ -224,11 +243,30 @@ header {
 
 }
 
-
-.contact {
+footer {
+    display: flex;
+    color: $color-font-secondary;
+    padding: 1rem;
+    justify-content: center;
+    background: linear-gradient(0.25turn, $color-tagline, $color-button-main);
+    flex-direction: column;
 
     @include tablet {
-        display: flex;
+        flex-direction: row;
+    }
+
+    @include desktop {
+        justify-content: flex-start;
+    }
+}
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+
+    @include tablet {
+        flex-direction: row;
         justify-content: space-around;
         align-items: center;
         width: 70%;
@@ -251,8 +289,13 @@ header {
     }
 
     &__title {
-        margin: 0;
+        margin: 0 auto;
         padding: 1rem 0;
+        display: flex;
+
+        @include tablet {
+            margin-right: 2rem;
+        }
     }
 
     &__link {
@@ -264,5 +307,22 @@ header {
 
     &__icon {
         width: 30px;
+    }
+}
+
+.author {
+    display: flex;
+    justify-content: center;
+
+    @include tablet {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__icon {
+        width: 60px;
+        height: 59.6px;
+        margin-right: 1rem;
+
     }
 }
