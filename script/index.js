@@ -1,6 +1,3 @@
-import API_KEY from "./apikey";
-console.log(API_KEY)
-// const apiKey = process.env.API_KEY;
 const apiUrl = "https://api.openai.com/v1/engines/text-curie-001/completions";
 //  ====== storing data for the user in the browser
 let db;
@@ -30,10 +27,11 @@ form.addEventListener("submit", addData);
 
 function addData(e) {
     e.preventDefault();
+    const namePrompt = "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";
     let userPrompt = promptInput.value;
     let apiPrompt = "Brainstorm some ideas combining ecommerce and " + userPrompt;
     let responseValue = "";
-    let authorization = "Bearer " + apiKey; 
+    let authorization = "Bearer " + namePrompt; 
     let headersApi = {
         "Content-Type": "application/json",
         "Authorization": authorization
