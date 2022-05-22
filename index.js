@@ -35,12 +35,13 @@ function addData(e) {
     e.preventDefault();
     const newName = {
         prompt: promptInput.value,
-        respose: responseValue
+        response: responseValue
     }
+    console.log(`we are saving: ${newName}`)
     const transaction = db.transaction(["names_os"], "readwrite");
     const objectStore = transaction.objectStore("names_os");
     const addRequest = objectStore.add(newName);
-    addRequest.addEventListener("succes", () => {
+    addRequest.addEventListener("success", () => {
         console.log(`input value ${promptInput}`)
         promptInput.value = "";
         console.log(`input value post clear ${promptInput}`)
