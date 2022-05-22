@@ -1,5 +1,5 @@
-@use "./partials/colors" as *;
-@use "./partials/mixins" as *;
+@use "../partials/colors" as *;
+@use "../partials/mixins" as *;
 
 html {
     font-size: 100%;
@@ -32,6 +32,11 @@ footer {
     }
 }
 
+header {
+    position: sticky;
+    top: 0;
+}
+
 .page-header {
     display: flex;
     align-items: center;
@@ -54,6 +59,158 @@ footer {
         font-size: 2rem;
         margin: 0;
     }
+}
+
+.app {
+    margin: 1rem;
+
+    @include tablet {
+        margin: 2.5rem;
+    }
+
+    @include desktop {
+        max-width: 55rem;
+        margin: 2.5rem auto;
+    }
+
+    &__title {
+        font-size: 1.5rem;
+
+        @include tablet {
+            font-size: 2rem;
+        }
+    }
+
+    &__input {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__gallery {
+        background-color: $color-background-alt;
+        border-radius: 8px;
+        padding-bottom: 0.5rem;
+    }
+}
+
+.form {
+    width: 100%;
+
+    @include desktop {
+        width: 45rem;
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+    }
+
+    &__label {
+        font-size: 0.75rem;
+        color: $color-label;
+        font-weight: 600;
+
+        @include tablet {
+            font-size: 1rem;
+        }
+    }
+
+    &__prompt {
+        font-size: 0.85rem;
+        padding: 0.75rem;
+        border-radius: 4px;
+        font-family: "Open Sans";
+
+        @include tablet {
+            font-size: 1.25rem;
+        }
+
+        &--error {
+            border-color: #d22d2d;
+        }
+    }
+
+    &__button {
+        font-size: 1rem;
+        color: $color-font-secondary;
+        background-color: $color-main-blue;
+        border-radius: 6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 2.5rem;
+        box-shadow: 0 5px 9px -1px rgba(0, 0, 0, 0.25);
+
+        @include tablet {
+            margin-left: auto;
+            padding: 0 2rem;
+        }
+    }
+}
+
+.gallery {
+
+    &__list {
+        list-style: none;
+        padding: 0;
+
+        @include tablet {
+            padding: 0 1rem;
+        }
+    }
+
+    &__item {
+        border-bottom: 1px solid $color-label;
+        padding: 1rem;
+    }
+}
+
+.item {
+    list-style: none;
+    padding: 0;
+
+    @include tablet {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__prompt {
+        @include tablet {
+            width: 35%;
+        }
+    }
+
+    &__response {
+        @include tablet {
+            width: 55%;
+        }
+    }
+
+    &__label {
+        color: $color-label;
+        font-size: 0.75rem;
+        font-weight: 600;
+
+        @include tablet {
+            font-size: 1rem;
+            display: none;
+        }
+
+        &--first {
+            display: flex;
+        }
+    }
+
+    &__content {
+        font-size: 0.85rem;
+
+        @include tablet {
+            font-size: 1.25rem;
+        }
+    }
+
+
 }
 
 
@@ -88,9 +245,6 @@ footer {
     }
 
     &__link {
-        // width: 30px;
-        // padding: 1rem;
-        // margin: 0 auto;
 
         @include tablet {
             margin: 0;
