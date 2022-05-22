@@ -1,4 +1,5 @@
-const apiKey = "#ign##del#";
+require('dotenv').config();
+const apiKey = process.env.API_KEY;
 const apiUrl = "https://api.openai.com/v1/engines/text-curie-001/completions";
 //  ====== storing data for the user in the browser
 let db;
@@ -29,12 +30,12 @@ form.addEventListener("submit", addData);
 function addData(e) {
     e.preventDefault();
     let userPrompt = promptInput.value;
-    let apiPrompt = "Brainstorm some ideas combining ecommerce and " + userPrompt
+    let apiPrompt = "Brainstorm some ideas combining ecommerce and " + userPrompt;
     let responseValue = "";
-    // sending prompt to API and getting a response.
+    let authorization = "Bearer " + apiKey; 
     let headersApi = {
         "Content-Type": "application/json",
-        "Authorization": "Bearer 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"
+        "Authorization": authorization
     };
     let dataApi = JSON.stringify({
         "prompt": apiPrompt,
